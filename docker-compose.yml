@@ -5,6 +5,7 @@ services:
   mlflow_db:
     image: postgres:14.1-bullseye
     restart: always
+    shm_size: '256MB'
     environment:
       POSTGRES_USER: mlflow
       POSTGRES_PASSWORD: ${db_password}
