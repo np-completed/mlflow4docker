@@ -1,4 +1,5 @@
 # MLflow 4 Docker
+This project combines MLflow with a database (PostgreSQL) and a reverse proxy (NGINX) into a multi-container Docker application (with docker-compose).
 
 ## Licensing
 
