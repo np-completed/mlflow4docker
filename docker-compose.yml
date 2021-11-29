@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  mlflow_db:
+    image: postgres:14.1-bullseye
+    restart: always
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: ${db_password}
+    volumes:
+      - mlflow_db_volume:/var/lib/postgresql/data
+
+  mlflow:
+    build: ./mlflow
+    restart: always
+    ports:
+      - 5000:5000
+    entrypoint: >
+      mlflow server 
+      -h 0.0.0.0 
+      --backend-store-uri postgresql://mlflow:${db_password}@mlflow_db/mlflow 
+      --default-artifact-root .
+
+volumes:
+  mlflow_db_volume:
