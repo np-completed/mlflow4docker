@@ -4,6 +4,9 @@ services:
 
   nginx:
     build: ./nginx
+    depends_on:
+      - mlflow
+      - minio
     ports:
       - 5000:5000
       - 9000:9000
@@ -21,6 +24,9 @@ services:
 
   mlflow:
     build: ./mlflow
+    depends_on:
+      - postgres
+      - minio
     restart: always
     environment:
       - AWS_ACCESS_KEY_ID=${S3_ROOT_USER}
